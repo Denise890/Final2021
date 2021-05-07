@@ -34,15 +34,10 @@ maledata$treatment <- as.factor(maledata$treatment)
 ## Bar chart 
 
 ```{r}
-Mals <- maledata %>% group_by(treatment,infected) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+Male <- maledata %>% group_by(treatment,infected) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
 
 
 # the group_by followed by summarize(count=n())
-
-
-#Now for percentage plot
-
-
 ```
 
 I didn't know how to fix error that kept trying it multiple times. I did watch the videos and seen the different plots. 
@@ -65,7 +60,22 @@ colPerc(table1)
 print (table1)
 ```
 
-As seen on the table above there were thousands of amles involved in the study and out of all those people 340 males became infected with Covid
+As seen on the table above there were thousands of males involved in the study and out of all those people 340 males became infected with Covid. it also shows the percentages of who got the drug and the placebo.
+
+## Inferential 
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The table above shows the the extremely small p value.
+$H_0$ The null hypothesis is that there is no real difference if the male vaccine get the vaccine or not
+$H_A$The alternative hypothesis is the vaccine would make a difference in weather of not the male gets Covid.
+
+
+  
 
 #Females 
 
