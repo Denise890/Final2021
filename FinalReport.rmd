@@ -71,13 +71,37 @@ fisher.test(table1)
 ```
 
 The table above shows the the extremely small p value.
-$H_0$ The null hypothesis is that there is no real difference if the male vaccine get the vaccine or not
+$H_0$ The null hypothesis is that there is no real difference if the male vaccine get the vaccine or not.
 $H_A$The alternative hypothesis is the vaccine would make a difference in weather of not the male gets Covid.
 
-
+The vaccines efficacy of the drug is retrieved by dviding the odd ratio of 1.47:1 by 0/(1+0)*100 which will get you 59.5. Therefore the Efficacy of the vaccine is 59.5%
   
 
 #Females 
+
+```{r}
+femaledata<- filter(FinalData,sex=="gal")
+femaledata$sex <- as.factor(femaledata$sex)
+femaledata$treatment <- as.factor(femaledata$treatment)
+```
+
+
+## Bar chart 
+
+```{r}
+Females <- Femaledata %>% group_by(infected, treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(Females,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(Females,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
 
 
 #LGBTQ
